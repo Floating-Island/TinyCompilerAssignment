@@ -1,10 +1,10 @@
 read x;
-if 0 < x
+if (0 < x)
 [
     fact := 1;
     repeat
     [
-        fact :=fact * x;
+        fact := fact * x;
         x := x -1;
     ] until x = 0;
 

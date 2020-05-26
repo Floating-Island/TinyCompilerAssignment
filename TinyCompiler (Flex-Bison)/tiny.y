@@ -50,20 +50,20 @@ stmt        : if_stmt { $$ = $1; }
             ;
 if_stmt     : IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET
                  { $$ = newStmtNode(IfK);
-                   $$->child[0] = $2;
-                   $$->child[1] = $4;
+                   $$->child[0] = $3;
+                   $$->child[1] = $6;
                  }
             | IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET ELSE LBRACKET stmt_seq RBRACKET
                  { $$ = newStmtNode(IfK);
-                   $$->child[0] = $2;
-                   $$->child[1] = $4;
-                   $$->child[2] = $6;
+                   $$->child[0] = $3;
+                   $$->child[1] = $6;
+                   $$->child[2] = $10;
                  }
             ;
 repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp SEMI
                  { $$ = newStmtNode(RepeatK);
-                   $$->child[0] = $2;
-                   $$->child[1] = $4;
+                   $$->child[0] = $3;
+                   $$->child[1] = $6;
                  }
             ;
 assign_stmt : ID { savedName = copyString(tokenString);
