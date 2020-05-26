@@ -60,7 +60,7 @@ if_stmt     : IF exp LBRACKET stmt_seq RBRACKET
                    $$->child[2] = $6;
                  }
             ;
-repeat_stmt : REPEAT stmt_seq UNTIL exp
+repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp
                  { $$ = newStmtNode(RepeatK);
                    $$->child[0] = $2;
                    $$->child[1] = $4;
