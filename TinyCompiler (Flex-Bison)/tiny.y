@@ -35,9 +35,9 @@ stmt_seq    : stmt_seq stmt
                    if (t != NULL)
                    { while (t->sibling != NULL)
                         t = t->sibling;
-                     t->sibling = $3;
+                     t->sibling = $2;
                      $$ = $1; }
-                     else $$ = $3;
+                     else $$ = $2;
                  }
             | stmt  { $$ = $1; }
             ;
