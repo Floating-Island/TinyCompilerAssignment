@@ -39,6 +39,8 @@ whitespace  [ \t]+
 "/"             {return OVER;}
 "("             {return LPAREN;}
 ")"             {return RPAREN;}
+"["             {return LBRACKET;}
+"]"             {return RBRACKET;}
 ";"             {return SEMI;}
 {number}        {return NUM;}
 {identifier}    {return ID;}
