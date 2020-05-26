@@ -37,11 +37,11 @@ FILE * listing;
 FILE * code;
 
 /* allocate and set tracing flags */
-int EchoSource = FALSE;
-int TraceScan = FALSE;
-int TraceParse = FALSE;
-int TraceAnalyze = FALSE;
-int TraceCode = FALSE;
+int EchoSource = TRUE;
+int TraceScan = TRUE;
+int TraceParse = TRUE;
+int TraceAnalyze = TRUE;
+int TraceCode = TRUE;
 
 int Error = FALSE;
 
