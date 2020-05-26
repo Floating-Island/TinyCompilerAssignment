@@ -30,7 +30,7 @@ static int yylex(void);
 program     : stmt_seq
                  { savedTree = $1;} 
             ;
-stmt_seq    : stmt_seq SEMI stmt
+stmt_seq    : stmt_seq stmt
                  { YYSTYPE t = $1;
                    if (t != NULL)
                    { while (t->sibling != NULL)
@@ -60,7 +60,7 @@ if_stmt     : IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET
                    $$->child[2] = $10;
                  }
             ;
-repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp
+repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp SEMI
                  { $$ = newStmtNode(RepeatK);
                    $$->child[0] = $3;
                    $$->child[1] = $6;
@@ -68,20 +68,20 @@ repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp
             ;
 assign_stmt : ID { savedName = copyString(tokenString);
                    savedLineNo = lineno; }
-              ASSIGN exp
+              ASSIGN exp SEMI
                  { $$ = newStmtNode(AssignK);
                    $$->child[0] = $4;
                    $$->attr.name = savedName;
                    $$->lineno = savedLineNo;
                  }
             ;
-read_stmt   : READ ID
+read_stmt   : READ ID SEMI
                  { $$ = newStmtNode(ReadK);
                    $$->attr.name =
                      copyString(tokenString);
                  }
             ;
-write_stmt  : WRITE exp
+write_stmt  : WRITE exp SEMI
                  { $$ = newStmtNode(WriteK);
                    $$->child[0] = $2;
                  }
