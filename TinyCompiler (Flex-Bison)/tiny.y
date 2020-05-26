@@ -48,12 +48,12 @@ stmt        : if_stmt { $$ = $1; }
             | write_stmt { $$ = $1; }
             | error  { $$ = NULL; }
             ;
-if_stmt     : IF exp THEN stmt_seq END
+if_stmt     : IF exp LBRACKET stmt_seq RBRACKET
                  { $$ = newStmtNode(IfK);
                    $$->child[0] = $2;
                    $$->child[1] = $4;
                  }
-            | IF exp THEN stmt_seq ELSE stmt_seq END
+            | IF exp LBRACKET stmt_seq RBRACKET ELSE LBRACKET stmt_seq RBRACKET
                  { $$ = newStmtNode(IfK);
                    $$->child[0] = $2;
                    $$->child[1] = $4;
