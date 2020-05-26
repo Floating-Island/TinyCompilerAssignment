@@ -42,10 +42,10 @@ stmt_seq    : stmt_seq stmt
             | stmt  { $$ = $1; }
             ;
 stmt        : if_stmt { $$ = $1; }
-            | repeat_stmt { $$ = $1; }
-            | assign_stmt { $$ = $1; }
-            | read_stmt { $$ = $1; }
-            | write_stmt { $$ = $1; }
+            | repeat_stmt SEMI{ $$ = $1; }
+            | assign_stmt SEMI{ $$ = $1; }
+            | read_stmt SEMI{ $$ = $1; }
+            | write_stmt SEMI{ $$ = $1; }
             | error  { $$ = NULL; }
             ;
 if_stmt     : IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET
@@ -60,7 +60,7 @@ if_stmt     : IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET
                    $$->child[2] = $10;
                  }
             ;
-repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp SEMI
+repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp
                  { $$ = newStmtNode(RepeatK);
                    $$->child[0] = $3;
                    $$->child[1] = $6;
@@ -68,20 +68,20 @@ repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp SEMI
             ;
 assign_stmt : ID { savedName = copyString(tokenString);
                    savedLineNo = lineno; }
-              ASSIGN exp SEMI
+              ASSIGN exp
                  { $$ = newStmtNode(AssignK);
                    $$->child[0] = $4;
                    $$->attr.name = savedName;
                    $$->lineno = savedLineNo;
                  }
             ;
-read_stmt   : READ ID SEMI
+read_stmt   : READ ID
                  { $$ = newStmtNode(ReadK);
                    $$->attr.name =
                      copyString(tokenString);
                  }
             ;
-write_stmt  : WRITE exp SEMI
+write_stmt  : WRITE exp
                  { $$ = newStmtNode(WriteK);
                    $$->child[0] = $2;
                  }
