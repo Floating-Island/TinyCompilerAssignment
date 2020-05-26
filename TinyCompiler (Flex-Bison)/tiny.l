@@ -23,9 +23,7 @@ whitespace  [ \t]+
 %%
 
 "if"            {return IF;}
-"then"          {return THEN;}
 "else"          {return ELSE;}
-"end"           {return END;}
 "repeat"        {return REPEAT;}
 "until"         {return UNTIL;}
 "read"          {return READ;}

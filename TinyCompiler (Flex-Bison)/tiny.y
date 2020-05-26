@@ -20,7 +20,7 @@ static TreeNode * savedTree; /* stores syntax tree for later return */
 static int yylex(void);
 %}
 
-%token IF THEN ELSE END REPEAT UNTIL READ WRITE
+%token IF ELSE REPEAT UNTIL READ WRITE
 %token ID NUM 
 %token ASSIGN EQ LT PLUS MINUS TIMES OVER LPAREN RPAREN LBRACKET RBRACKET SEMI
 %token ERROR 
