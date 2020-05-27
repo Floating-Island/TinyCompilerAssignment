@@ -15,7 +15,7 @@ At the top level are:
      The file you are now reading (README):
 
      The sixteen files as listed on page 23 of the text (which are
-     used to make the TINY compiler)
+     used to make the TINY compiler). Scanner and Parser replaced by tiny.l and tiny.y.
 
      The tm.c source code file for the TM machine interpreter
 
