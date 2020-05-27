@@ -102,7 +102,7 @@ exp         : simple_exp LT simple_exp
                  { $$ = newExpNode(OpK);
                    $$->child[0] = $1;
                    $$->child[1] = $3;
-                   $$->attr.op = EQ;
+                   $$->attr.op = NOTEQ;
                  }
             | simple_exp { $$ = $1; }
             ;
