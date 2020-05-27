@@ -6,7 +6,7 @@ if (0 < x)
     [
         fact := fact * x;
         x := x - 1;
-    ] until x = 0;
+    ] until (x = 0);
 
     write fact;
 ]
