@@ -1,9 +1,0 @@
-read x;
-if (x != 2)
-[
-    write 51;
-]
-else
-[
-    write 80;
-]
