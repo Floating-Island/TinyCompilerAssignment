@@ -22,7 +22,7 @@ static int yylex(void);
 
 %token IF ELSE REPEAT UNTIL READ WRITE
 %token ID NUM 
-%token ASSIGN EQ LT PLUS MINUS TIMES OVER LPAREN RPAREN LBRACKET RBRACKET SEMI
+%token ASSIGN EQ NOTEQ LT PLUS MINUS TIMES OVER LPAREN RPAREN LBRACKET RBRACKET SEMI
 %token ERROR 
 
 %% /* Grammar for TINY */
@@ -93,6 +93,12 @@ exp         : simple_exp LT simple_exp
                    $$->attr.op = LT;
                  }
             | simple_exp EQ simple_exp
+                 { $$ = newExpNode(OpK);
+                   $$->child[0] = $1;
+                   $$->child[1] = $3;
+                   $$->attr.op = EQ;
+                 }
+            | simple_exp NOTEQ simple_exp
                  { $$ = newExpNode(OpK);
                    $$->child[0] = $1;
                    $$->child[1] = $3;

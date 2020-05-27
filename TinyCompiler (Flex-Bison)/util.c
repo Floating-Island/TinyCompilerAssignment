@@ -26,6 +26,7 @@ void printToken( TokenType token, const char* tokenString )
     case ASSIGN: fprintf(listing,":=\n"); break;
     case LT: fprintf(listing,"<\n"); break;
     case EQ: fprintf(listing,"=\n"); break;
+    case NOTEQ: fprintf(listing,"!=\n"); break;
     case LPAREN: fprintf(listing,"(\n"); break;
     case RPAREN: fprintf(listing,")\n"); break;
     case LBRACKET: fprintf(listing,"[\n"); break;

@@ -30,6 +30,7 @@ whitespace  [ \t]+
 "write"         {return WRITE;}
 ":="            {return ASSIGN;}
 "="             {return EQ;}
+"!="             {return NOTEQ;}
 "<"             {return LT;}
 "+"             {return PLUS;}
 "-"             {return MINUS;}
