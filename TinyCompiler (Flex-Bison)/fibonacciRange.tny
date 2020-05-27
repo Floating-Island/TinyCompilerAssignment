@@ -1,35 +1,35 @@
-{encuentra los numeros de fibonacci entre 0 y el numero dado, que tiene que ser mayor a 1.}
+{finds the Fibonacci numbers between 0 and the limit specified as input, which has to be bigger than 1}
 
 
-read limite;
+read limit;
 
-if( 1 < limite)
+if( 1 < limit)
 [
-    fiboUno := 0;
-    fiboDos :=1;
+    fiboOne := 0;
+    fiboTwo :=1;
 
-    write fiboUno; {escribe F0}
-    write fiboDos; {escribe F1}
+    write fiboOne; {writes F0}
+    write fiboTwo; {writes F1}
     
     repeat
     [
-        numeroFibonacci := fiboUno + fiboDos;{suma recursiva de fibonacci, Fn}
-        if (numeroFibonacci < limite)
+        fibonacciNumber := fiboOne + fiboTwo; {Fibonacci recursive sum, Fn}
+        if (fibonacciNumber < limit)
         [
-            write numeroFibonacci;
-            fiboUno := fiboDos;
-            fiboDos := numeroFibonacci;
+            write fibonacciNumber;
+            fiboOne := fiboTwo;
+            fiboTwo := fibonacciNumber;
         ]
         else
         [
-            if (limite != numeroFibonacci)
+            if (limit != fibonacciNumber)
             [
-                numeroFibonacci := limite;
+                fibonacciNumber := limit;
             ]
             else
             [
-                write limite;
+                write limit;
             ]
         ]
-    ]until (numeroFibonacci = limite);
+    ]until (fibonacciNumber = limit);
 ]
