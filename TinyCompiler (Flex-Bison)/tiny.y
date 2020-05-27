@@ -60,10 +60,10 @@ if_stmt     : IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET
                    $$->child[2] = $10;
                  }
             ;
-repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL exp
+repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL LPAREN exp RPAREN
                  { $$ = newStmtNode(RepeatK);
                    $$->child[0] = $3;
-                   $$->child[1] = $6;
+                   $$->child[1] = $7;
                  }
             ;
 assign_stmt : ID { savedName = copyString(tokenString);
