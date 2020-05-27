@@ -23,6 +23,15 @@ At the top level are:
 
 This is the lex/Flex, Yacc/Bison version of the compiler.
 
+To run the compiler (Tiny):
+
+     make all
+     ./tiny fileToCompile.tny
+
+to run the compiled program in the interpreter (TM):
+
+     ./tm compiledFile.tm
+
 For making changes to the language, you should change the files:
 
      (Language modification)
