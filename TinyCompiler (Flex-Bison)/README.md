@@ -25,14 +25,14 @@ This is the lex/Flex, Yacc/Bison version of the compiler.
 
 For making changes to the language, you should change the files:
 
-(Language modification)
--tiny.l
--tiny.y
+     (Language modification)
+     -tiny.l
+     -tiny.y
 
-(printing modified tokens in the Tiny Compiler)
--util.c
+     (printing modified tokens in the Tiny Compiler)
+     -util.c
 
-(code generation for the TM interpreter)
--cgen.c
--code.c (if you need more assembly-like instructions)
+     (code generation for the TM interpreter)
+     -cgen.c
+     -code.c (code.c if you need more assembly-like instructions)
 
