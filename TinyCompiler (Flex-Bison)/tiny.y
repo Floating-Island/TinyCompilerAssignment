@@ -20,9 +20,9 @@ static TreeNode * savedTree; /* stores syntax tree for later return */
 static int yylex(void);
 %}
 
-%token IF THEN ELSE END REPEAT UNTIL READ WRITE
+%token IF ELSE REPEAT UNTIL READ WRITE
 %token ID NUM 
-%token ASSIGN EQ LT PLUS MINUS TIMES OVER LPAREN RPAREN SEMI
+%token ASSIGN EQ NOTEQ LT PLUS MINUS TIMES OVER LPAREN RPAREN LBRACKET RBRACKET SEMI
 %token ERROR 
 
 %% /* Grammar for TINY */
@@ -30,40 +30,40 @@ static int yylex(void);
 program     : stmt_seq
                  { savedTree = $1;} 
             ;
-stmt_seq    : stmt_seq SEMI stmt
+stmt_seq    : stmt_seq stmt
                  { YYSTYPE t = $1;
                    if (t != NULL)
                    { while (t->sibling != NULL)
                         t = t->sibling;
-                     t->sibling = $3;
+                     t->sibling = $2;
                      $$ = $1; }
-                     else $$ = $3;
+                     else $$ = $2;
                  }
             | stmt  { $$ = $1; }
             ;
 stmt        : if_stmt { $$ = $1; }
-            | repeat_stmt { $$ = $1; }
-            | assign_stmt { $$ = $1; }
-            | read_stmt { $$ = $1; }
-            | write_stmt { $$ = $1; }
+            | repeat_stmt SEMI{ $$ = $1; }
+            | assign_stmt SEMI{ $$ = $1; }
+            | read_stmt SEMI{ $$ = $1; }
+            | write_stmt SEMI{ $$ = $1; }
             | error  { $$ = NULL; }
             ;
-if_stmt     : IF exp THEN stmt_seq END
+if_stmt     : IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET
                  { $$ = newStmtNode(IfK);
-                   $$->child[0] = $2;
-                   $$->child[1] = $4;
+                   $$->child[0] = $3;
+                   $$->child[1] = $6;
                  }
-            | IF exp THEN stmt_seq ELSE stmt_seq END
+            | IF LPAREN exp RPAREN LBRACKET stmt_seq RBRACKET ELSE LBRACKET stmt_seq RBRACKET
                  { $$ = newStmtNode(IfK);
-                   $$->child[0] = $2;
-                   $$->child[1] = $4;
-                   $$->child[2] = $6;
+                   $$->child[0] = $3;
+                   $$->child[1] = $6;
+                   $$->child[2] = $10;
                  }
             ;
-repeat_stmt : REPEAT stmt_seq UNTIL exp
+repeat_stmt : REPEAT LBRACKET stmt_seq RBRACKET UNTIL LPAREN exp RPAREN
                  { $$ = newStmtNode(RepeatK);
-                   $$->child[0] = $2;
-                   $$->child[1] = $4;
+                   $$->child[0] = $3;
+                   $$->child[1] = $7;
                  }
             ;
 assign_stmt : ID { savedName = copyString(tokenString);
@@ -97,6 +97,12 @@ exp         : simple_exp LT simple_exp
                    $$->child[0] = $1;
                    $$->child[1] = $3;
                    $$->attr.op = EQ;
+                 }
+            | simple_exp NOTEQ simple_exp
+                 { $$ = newExpNode(OpK);
+                   $$->child[0] = $1;
+                   $$->child[1] = $3;
+                   $$->attr.op = NOTEQ;
                  }
             | simple_exp { $$ = $1; }
             ;

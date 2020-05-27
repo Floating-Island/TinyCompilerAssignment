@@ -11,9 +11,9 @@ LEX = flex
 
 LFLAGS =
 
-YACC = bison
+YACC = bison #doesn't work replacing this into the y.tab.c y.tab.h:
 
-YFLAGS = --yacc --defines=y.tab.h
+YFLAGS = --yacc --defines=y.tab.h #doesn't work replacing this into the y.tab.c y.tab.h:
 
 OBJS = main.o util.o lex.yy.o y.tab.o symtab.o analyze.o code.o cgen.o 
 
